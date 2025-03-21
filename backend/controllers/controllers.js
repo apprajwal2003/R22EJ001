@@ -15,7 +15,43 @@ export const topUsers = async (req, res) => {
     console.log(users);
     res.json(users);
   } catch (error) {
-    console.error("Error fetching users:", error.message);
-    console.error("Detailed response:", error.response?.data);
+    console.error("Error:", error.message);
+    console.error("response:", error.response?.data);
   }
 };
+
+export const trendingPosts = async (req, res) => {
+  try {
+    const { data } = await axios.get(`${TEST_SERVER}/users`, {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    });
+
+    // const users = data.users;
+    // console.log(users);
+    // res.json(users);
+  } catch (error) {
+    console.error("Error:", error.message);
+    console.error("response:", error.response?.data);
+  }
+};
+
+export const feed = async (req, res) => {
+  try {
+    const { data } = await axios.get(`${TEST_SERVER}/users`, {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    });
+
+    // const users = data.users;
+    // console.log(users);
+    // res.json(users);
+  } catch (error) {
+    console.error("Error:", error.message);
+    console.error("response:", error.response?.data);
+  }
+};
+
+export default { topUsers, trendingPosts, feed };
