@@ -12,8 +12,23 @@ export const topUsers = async (req, res) => {
     });
 
     const users = data.users;
-    console.log(users);
-    res.json(users);
+    const usersCount = {};
+
+    const promises = Object.keys(users).map(async (userId) => {
+      const allPosts = axios.get(`${TEST_SERVER}/users/${userId}/posts`, {
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+        },
+      });
+      usersCount[userId] = allPosts.posts.length;
+    });
+
+    await Promise.all(promises);
+
+    const resUsers = Object.keys(users).map((userId) => ({}));
+
+    console.log(resUsers);
+    res.json(resUsers);
   } catch (error) {
     console.error("Error:", error.message);
     console.error("response:", error.response?.data);
@@ -27,10 +42,6 @@ export const trendingPosts = async (req, res) => {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     });
-
-    // const users = data.users;
-    // console.log(users);
-    // res.json(users);
   } catch (error) {
     console.error("Error:", error.message);
     console.error("response:", error.response?.data);
@@ -44,10 +55,6 @@ export const feed = async (req, res) => {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     });
-
-    // const users = data.users;
-    // console.log(users);
-    // res.json(users);
   } catch (error) {
     console.error("Error:", error.message);
     console.error("response:", error.response?.data);
