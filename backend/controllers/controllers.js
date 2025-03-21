@@ -2,7 +2,7 @@ import axios from "axios";
 const TEST_SERVER = "http://20.244.56.144/test";
 const ACCESS_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZXhwIjoxNzQyNTMzNDY4LCJpYXQiOjE3NDI1MzMxNjgsImlzcyI6IkFmZm9yZG1lZCIsImp0aSI6IjFlOWRkMWUxLTA1MDUtNGMwMi05NjQyLWYxM2JlOWM3Y2RjYSIsInN1YiI6ImFwcHJhandhbHdvcmtAZ21haWwuY29tIn0sImNvbXBhbnlOYW1lIjoiYnJvQ29kZSIsImNsaWVudElEIjoiMWU5ZGQxZTEtMDUwNS00YzAyLTk2NDItZjEzYmU5YzdjZGNhIiwiY2xpZW50U2VjcmV0IjoieUluZVhiSG54UU1RSk1JbyIsIm93bmVyTmFtZSI6IkEgUCBQcmFqd2FsIiwib3duZXJFbWFpbCI6ImFwcHJhandhbHdvcmtAZ21haWwuY29tIiwicm9sbE5vIjoiUjIyRUowMDEifQ.NRoEZRxQgwdN8FgPEGV-LBjXgJIm68uG3jH3W4mhIr8";
-
+//top users details fetching
 export const topUsers = async (req, res) => {
   try {
     const { data } = await axios.get(`${TEST_SERVER}/users`, {
@@ -13,7 +13,7 @@ export const topUsers = async (req, res) => {
 
     const users = data.users;
     const usersCount = {};
-
+    //store usersCount on how many post they have
     const promises = Object.keys(users).map(async (userId) => {
       const allPosts = axios.get(`${TEST_SERVER}/users/${userId}/posts`, {
         headers: {
@@ -35,6 +35,7 @@ export const topUsers = async (req, res) => {
   }
 };
 
+//trending posts details
 export const trendingPosts = async (req, res) => {
   try {
     const { data } = await axios.get(`${TEST_SERVER}/users`, {
@@ -48,6 +49,7 @@ export const trendingPosts = async (req, res) => {
   }
 };
 
+//feed data fetching
 export const feed = async (req, res) => {
   try {
     const { data } = await axios.get(`${TEST_SERVER}/users`, {

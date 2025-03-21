@@ -1,5 +1,5 @@
 import React from "react";
-
+//should replace with api data
 const posts = [
   { userId: 101, content: "Just learned React! 🚀" },
   { userId: 102, content: "Bootstrap makes styling easy!" },
